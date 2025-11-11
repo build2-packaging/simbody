@@ -1,6 +1,6 @@
 : 1
 name: libsimbody
-version: 3.8.0-a.0.z
+version: 3.8.0
 project: simbody
 language: c++
 summary: SimTK multibody dynamics C++ library
