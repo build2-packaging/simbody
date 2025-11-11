@@ -1,0 +1,7 @@
+: 1
+name: libsimbody
+version: 3.8.0+1
+language: c++
+project: simbody
+summary: SimTK multibody dynamics C++ library
+license: Apache-2.0; Apache License 2.0.
