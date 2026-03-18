@@ -7,7 +7,7 @@ macos   = ($cxx.target.class == 'macos')
 #       implements LAPACK & BLAS. See '# Libraries'.
 #
 if! $macos
-  import impl_libs = liboneapi-mkl%libs{mkl-lp64 mkl-rt}
+  import intf_libs = liboneapi-mkl%libs{mkl-lp64 mkl-rt}
 
 # Headers and source files.
 #
