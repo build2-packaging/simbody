@@ -20,3 +20,4 @@ builds: -static  ; Not supported on Windows and some upstream tests crash if sta
 build-exclude: windows*-clang*llvm** ; Looks like MS cppwinrt bug #1179.
 depends: * build2 >= 0.17.0
 depends: * bpkg >= 0.17.0
+depends: liboneapi-mkl ^2025.1.0 ? ($cxx.target.class != 'macos')
