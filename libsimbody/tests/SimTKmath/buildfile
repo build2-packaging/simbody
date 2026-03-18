@@ -10,7 +10,9 @@ import lib = libsimbody%lib{SimTKmath}
 #       upstream.
 #
 for t: tests/cxx{* -TestBicubicSurface}
+{
   ./: exe{$name($t)}: $t testscript $lib
+}
 
 exe{TestSpline}: test.cleanups = '&simtk_splinefitter*.csv'
 exe{CMAESTest}:  test.cleanups = '&actparcmaes.par' \

@@ -1,17 +1,3 @@
-# TODO
-
-1) Consider replacing the upstream-provided prebuilt Windows libraries with
-   build2-packaged ones.
-
-2) Consider providing build2-packaged LAPACK and BLAS libraries on Linux and
-   BSD. Currently we rely on the user to install the system-provided ones (as
-   upstream also does).
-
-One potential current problem with 1) and 2) is that the reference and/or the
-most widely used LAPACK and BLAS implementations seem to be written in Fortran
-which build2 does not currently support. But odds are good that a suitable C
-implementation does exist (e.g. Intel oneMKL).
-
 # Patches applied to the upstream code
 
 1) Simbody/include/simbody/internal/CableSpan.h and

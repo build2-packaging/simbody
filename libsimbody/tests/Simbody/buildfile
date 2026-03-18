@@ -12,4 +12,6 @@ import lib = libsimbody%lib{SimTKsimbody}
 #       upstream.
 #
 for t: tests/cxx{* -TestConstraints}
+{
   ./: exe{$name($t)}: $t testscript $lib
+}

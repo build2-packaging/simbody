@@ -1,4 +1,4 @@
-import lib = libsimbody%lib{SimTKcommon}
+import lib = libsimbody%lib{SimTKcommon} liboneapi-mkl%libs{mkl-thread-tbb}
 
 ./: tests/hxx{*} # Ensure any headers are distributed
 
