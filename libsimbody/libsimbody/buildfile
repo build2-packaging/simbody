@@ -1,9 +1,13 @@
 impl_libs =
 
-import intf_libs = liboneapi-mkl%libs{mkl-lp64 mkl-rt}
-
 windows = ($cxx.target.class == 'windows')
 macos   = ($cxx.target.class == 'macos')
+
+# Note: MacOS is not supported by MKL, but the system framework 'Accelerate'
+#       implements LAPACK & BLAS. See '# Libraries'.
+#
+if! $macos
+  import impl_libs = liboneapi-mkl%libs{mkl-lp64 mkl-rt}
 
 # Headers and source files.
 #
@@ -26,7 +30,9 @@ macos   = ($cxx.target.class == 'macos')
 sys_libs =
 if! $windows
 {
-  if! $macos
+  if $macos
+    sys_libs += -framework Accelerate # LAPACK & BLAS
+  else
     sys_libs += -pthread -lrt
 
   sys_libs += -ldl -lm

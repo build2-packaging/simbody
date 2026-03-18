@@ -1,4 +1,9 @@
-import lib = libsimbody%lib{SimTKcommon} liboneapi-mkl%libs{mkl-thread-tbb}
+import libs = libsimbody%lib{SimTKcommon}
+
+macos   = ($cxx.target.class == 'macos')
+
+if! $macos
+  import libs += liboneapi-mkl%libs{mkl-thread-tbb}
 
 ./: tests/hxx{*} # Ensure any headers are distributed
 
@@ -18,7 +23,7 @@ for t: tests/cxx{* -SFMTTest}
   n = $name($t)
 
   ./: exe{$name($t)}: include = ($n != 'BNTTest' || $cxx.id.type != 'gcc')
-  exe{$name($t)}: $t testscript $lib
+  exe{$name($t)}: $t testscript $libs
 }
 
 exe{TestPolygonalMesh}: test.cleanups = '&anchor1.vtp'  \
