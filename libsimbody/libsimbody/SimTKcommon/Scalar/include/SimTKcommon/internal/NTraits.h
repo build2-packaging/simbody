@@ -841,6 +841,20 @@ SimTK_NTRAITS_CONJ_SPEC(double,float);SimTK_NTRAITS_CONJ_SPEC(double,double);
 //   Typeof(R+P) = Typeof(P+R)
 //   typeof(R-P) = Typeof(P::TNeg + R)
 // These must be specialized for P=Real and P=Complex.
+
+// Helper macros for sqrt/pow-dependent getters in SimTK_DEFINE_REAL_NTRAITS.
+// When __cpp_lib_constexpr_cmath is available (C++23) these become constexpr.
+// Otherwise they fall back to function-level statics (same as the upstream form).
+#if defined(__cpp_lib_constexpr_cmath)
+# define SimTK_NTRAITS_GETSIG(T)     static constexpr T getSignificant() {return std::sqrt(getEps());}
+# define SimTK_NTRAITS_GETSQRTEPS(T) static constexpr T getSqrtEps()     {return std::sqrt(getEps());}
+# define SimTK_NTRAITS_GETTINY(T)    static constexpr T getTiny()         {return std::pow(getEps(),(T)1.25L);}
+#else
+# define SimTK_NTRAITS_GETSIG(T)     static const T& getSignificant() {return RTraits<T>::getSignificant();}
+# define SimTK_NTRAITS_GETSQRTEPS(T) static const T& getSqrtEps()     {static const T c=std::sqrt(getEps());         return c;}
+# define SimTK_NTRAITS_GETTINY(T)    static const T& getTiny()        {static const T c=std::pow(getEps(),(T)1.25L); return c;}
+#endif
+
 #define SimTK_DEFINE_REAL_NTRAITS(R)            \
 template <> class NTraits<R> {                  \
 public:                                         \
@@ -920,16 +934,16 @@ public:                                         \
     static TNormalize normalize(const T& t) {return (t>0?T(1):(t<0?T(-1):getNaN()));} \
     static TInvert invert(const T& t) {return T(1)/t;}                      \
     /* properties of this floating point representation, with memory addresses */     \
-    static const T& getEps()          {return RTraits<T>::getEps();}                                    \
-    static const T& getSignificant()  {return RTraits<T>::getSignificant();}                            \
-    static const T& getNaN()          {static const T c=std::numeric_limits<T>::quiet_NaN(); return c;} \
-    static const T& getInfinity()     {static const T c=std::numeric_limits<T>::infinity();  return c;} \
+    static constexpr T getEps()      {return std::numeric_limits<T>::epsilon();}                         \
+    SimTK_NTRAITS_GETSIG(T)                                                                              \
+    static constexpr T getNaN()      {return std::numeric_limits<T>::quiet_NaN();}                       \
+    static constexpr T getInfinity() {return std::numeric_limits<T>::infinity();}                        \
     static const T& getLeastPositive(){static const T c=std::numeric_limits<T>::min();       return c;} \
     static const T& getMostPositive() {static const T c=std::numeric_limits<T>::max();       return c;} \
     static const T& getLeastNegative(){static const T c=-std::numeric_limits<T>::min();      return c;} \
     static const T& getMostNegative() {static const T c=-std::numeric_limits<T>::max();      return c;} \
-    static const T& getSqrtEps()      {static const T c=std::sqrt(getEps());                 return c;} \
-    static const T& getTiny()         {static const T c=std::pow(getEps(), (T)1.25L);        return c;} \
+    SimTK_NTRAITS_GETSQRTEPS(T)                                                                          \
+    SimTK_NTRAITS_GETTINY(T)                                                                             \
     static bool isFinite(const T& t) {return SimTK::isFinite(t);}   \
     static bool isNaN   (const T& t) {return SimTK::isNaN(t);}      \
     static bool isInf   (const T& t) {return SimTK::isInf(t);}      \
