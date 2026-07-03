@@ -35,12 +35,18 @@ namespace SimTK {
 // These constants are global external symbols exported by the library. See
 // the Scalar.h header file for information.
 
-const Real NaN               = NTraits<Real>::getNaN(); 
-const Real Infinity          = NTraits<Real>::getInfinity();
-const Real Eps               = NTraits<Real>::getEps();
+constexpr Real NaN      = NTraits<Real>::getNaN();
+constexpr Real Infinity = NTraits<Real>::getInfinity();
+constexpr Real Eps      = NTraits<Real>::getEps();
+#if defined(__cpp_lib_constexpr_cmath)
+constexpr Real SqrtEps        = NTraits<Real>::getSqrtEps();
+constexpr Real TinyReal       = NTraits<Real>::getTiny();
+constexpr Real SignificantReal = NTraits<Real>::getSignificant();
+#else
 const Real SqrtEps           = NTraits<Real>::getSqrtEps();
-const Real TinyReal          = NTraits<Real>::getTiny(); 
-const Real SignificantReal   = NTraits<Real>::getSignificant(); 
+const Real TinyReal          = NTraits<Real>::getTiny();
+const Real SignificantReal   = NTraits<Real>::getSignificant();
+#endif
 const Real LeastPositiveReal = NTraits<Real>::getLeastPositive(); 
 const Real MostPositiveReal  = NTraits<Real>::getMostPositive();  
 const Real LeastNegativeReal = NTraits<Real>::getLeastNegative();
