@@ -189,6 +189,12 @@ lib{SimTKsimbody}:
 liba{SimTKcommon SimTKmath SimTKsimbody}: \
   cxx.export.poptions += -DSimTK_USE_STATIC_LIBRARIES
 
+# Force all object files from each static library into the final executable.
+# Without this, the linker may omit translation units that contain only
+# file-scope self-registering statics (e.g. registerStandardAlgorithms() in
+# CollisionDetectionAlgorithm.cpp), causing silent missing functionality.
+liba{SimTKcommon SimTKmath SimTKsimbody}: bin.whole = true
+
 # For pre-releases use the complete version to make sure they cannot
 # be used in place of another pre-release or the final version. See
 # the version module for details on the version.* variable values.
