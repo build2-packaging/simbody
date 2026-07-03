@@ -1,0 +1,1 @@
+../../../../../../../upstream/SimTKcommon/Mechanics/include/SimTKcommon/internal/SpatialAlgebra.h
