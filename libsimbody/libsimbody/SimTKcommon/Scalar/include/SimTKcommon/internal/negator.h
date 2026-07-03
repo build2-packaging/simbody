@@ -1,0 +1,1 @@
+../../../../../../../upstream/SimTKcommon/Scalar/include/SimTKcommon/internal/negator.h
