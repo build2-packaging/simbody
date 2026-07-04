@@ -488,33 +488,25 @@ public:
 
     /** Construct a Vec<2,E> from two elements of type E, etc. **/
     constexpr Vec(const E& e0,const E& e1)
-      { static_assert(M==2,"Vec(e0,e1) requires a size-2 Vec");
-        d[0*STRIDE]=e0; d[1*STRIDE]=e1; }
+      { d[0*STRIDE]=e0; d[1*STRIDE]=e1; }
     constexpr Vec(const E& e0,const E& e1,const E& e2)
-      { static_assert(M==3,"Vec(e0,e1,e2) requires a size-3 Vec");
-        d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2; }
+      { d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2; }
     constexpr Vec(const E& e0,const E& e1,const E& e2,const E& e3)
-      { static_assert(M==4,"Vec(e0,e1,e2,e3) requires a size-4 Vec");
-        d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2; d[3*STRIDE]=e3; }
+      { d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2; d[3*STRIDE]=e3; }
     constexpr Vec(const E& e0,const E& e1,const E& e2,const E& e3,const E& e4)
-      { static_assert(M==5,"Vec(e0..e4) requires a size-5 Vec");
-        d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2;
+      { d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2;
         d[3*STRIDE]=e3; d[4*STRIDE]=e4; }
     constexpr Vec(const E& e0,const E& e1,const E& e2,const E& e3,const E& e4,const E& e5)
-      { static_assert(M==6,"Vec(e0..e5) requires a size-6 Vec");
-        d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2;
+      { d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2;
         d[3*STRIDE]=e3; d[4*STRIDE]=e4; d[5*STRIDE]=e5; }
     constexpr Vec(const E& e0,const E& e1,const E& e2,const E& e3,const E& e4,const E& e5, const E& e6)
-      { static_assert(M==7,"Vec(e0..e6) requires a size-7 Vec");
-        d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2;
+      { d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2;
         d[3*STRIDE]=e3; d[4*STRIDE]=e4; d[5*STRIDE]=e5; d[6*STRIDE]=e6; }
     constexpr Vec(const E& e0,const E& e1,const E& e2,const E& e3,const E& e4,const E& e5, const E& e6, const E& e7)
-      { static_assert(M==8,"Vec(e0..e7) requires a size-8 Vec");
-        d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2;
+      { d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2;
         d[3*STRIDE]=e3; d[4*STRIDE]=e4; d[5*STRIDE]=e5; d[6*STRIDE]=e6; d[7*STRIDE]=e7; }
     constexpr Vec(const E& e0,const E& e1,const E& e2,const E& e3,const E& e4,const E& e5, const E& e6, const E& e7, const E& e8)
-      { static_assert(M==9,"Vec(e0..e8) requires a size-9 Vec");
-        d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2;
+      { d[0*STRIDE]=e0; d[1*STRIDE]=e1; d[2*STRIDE]=e2;
         d[3*STRIDE]=e3; d[4*STRIDE]=e4; d[5*STRIDE]=e5; d[6*STRIDE]=e6; d[7*STRIDE]=e7; d[8*STRIDE]=e8; }
 
     /** Construction from a pointer to elements of any type EE assumes we're 
