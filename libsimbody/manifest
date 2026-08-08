@@ -13,11 +13,8 @@ src-url: https://github.com/simbody/simbody
 email: simbody-users@lists.simtk.org ; Mailing list.
 package-url: https://github.com/build2-packaging/simbody
 package-email: packaging@build2.org ; Mailing list.
-builds: default
-builds: -linux   ; No LAPACK or BLAS on CI.
-builds: -freebsd ; No LAPACK or BLAS on CI.
-builds: -static  ; Not supported on Windows and some upstream tests crash if statically built.
-build-exclude: windows*-clang*llvm** ; Looks like MS cppwinrt bug #1179.
+build-include: macos**
+build-exclude: ** ; Depends on intel-oneapi-toolkit which downloads large binaries on CI.
 depends: * build2 >= 0.17.0
 depends: * bpkg >= 0.17.0
 depends: liboneapi-mkl ^2026.0.0- ? ($cxx.target.class != 'macos')
