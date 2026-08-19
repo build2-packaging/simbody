@@ -193,7 +193,12 @@ liba{SimTKcommon SimTKmath SimTKsimbody}: \
 # Without this, the linker may omit translation units that contain only
 # file-scope self-registering statics (e.g. registerStandardAlgorithms() in
 # CollisionDetectionAlgorithm.cpp), causing silent missing functionality.
-liba{SimTKcommon SimTKmath SimTKsimbody}: bin.whole = true
+#
+# Note: SimTKcommon is excluded here. It is a direct dependency of both
+# SimTKmath and SimTKsimbody, so it is reachable via more than one path in
+# the static link graph; forcing it whole would make the linker extract its
+# object files once per path, causing 'multiple definition' errors.
+liba{SimTKmath SimTKsimbody}: bin.whole = true
 
 # For pre-releases use the complete version to make sure they cannot
 # be used in place of another pre-release or the final version. See
