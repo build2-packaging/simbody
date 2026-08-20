@@ -17,4 +17,4 @@ build-include: macos**
 build-exclude: ** ; Depends on intel-oneapi-toolkit which downloads large binaries on CI.
 depends: * build2 >= 0.17.0
 depends: * bpkg >= 0.17.0
-depends: liboneapi-mkl ^2026.0.0- ? ($cxx.target.class != 'macos')
+depends: liboneapi-mkl ^2026.0.0 ? ($cxx.target.class != 'macos')
