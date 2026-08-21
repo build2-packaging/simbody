@@ -46,11 +46,6 @@ lib{SimTKsimbody}
 Most user applications will only need to be linked against
 `lib{SimTKsimbody}`.
 
-Note that only dynamic libraries (DLLs) are supported on Windows. This is
-because this package only supports the prebuilt dependencies provided in the
-upstream repository (see `upstream/Platform/`) of which only DLLs are
-provided.
-
 ## Dependencies
 
 ### Linux
